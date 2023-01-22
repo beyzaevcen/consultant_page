@@ -24,13 +24,13 @@ class Const {
         votes: 5),
     Consultant(
         id: 2,
-        fullname: "Zehra Ötürk",
+        fullname: "Zehra Öztürk",
         profileImage:
             "https://images.unsplash.com/photo-1570481662006-a3a1374699e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
         bgImage:
-            "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=694&q=80",
+            "https://images.unsplash.com/photo-1534198562810-5cdfce0ed4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
         date: DateTime.now(),
-        duration: const Duration(minutes: 70),
-        votes: 5)
+        duration: const Duration(minutes: 60),
+        votes: 4)
   ];
 }
