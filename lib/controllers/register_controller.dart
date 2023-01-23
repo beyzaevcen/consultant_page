@@ -5,23 +5,36 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final fullName = TextEditingController();
-  final bigImageUrl = TextEditingController();
-  final profilePicUrl = TextEditingController();
+  final bigImageUrl = TextEditingController(
+      text:
+          "https://i.picsum.photos/id/10/1920/1920.jpg?hmac=lalf_8VPuxgc7vTTtCpqdyml8ro9eC2A4Hj3zQJWI60");
+  final profilePicUrl = TextEditingController(
+      text:
+          "https://i.picsum.photos/id/10/1920/1920.jpg?hmac=lalf_8VPuxgc7vTTtCpqdyml8ro9eC2A4Hj3zQJWI60");
   final dateTime = DateTime.now().obs;
-  final duration = TextEditingController();
   final date = TextEditingController();
+  final durationTxt = TextEditingController();
   final consultants = <Consultant>[].obs;
 
+  final duration = Duration.zero.obs;
+
   createConsultant() {
-    Const.consultants.add(Consultant(
-        id: Const.consultants.length - 1,
+    Const.consultants.add(
+      Consultant(
+        id: Const.consultants.length,
         fullname: fullName.text,
         profileImage: profilePicUrl.text,
         bgImage: bigImageUrl.text,
         date: dateTime.value,
-        duration: Duration(minutes: int.parse(duration.text)),
-        votes: 0));
-    print(Const.consultants.last.duration);
+        duration: duration.value,
+        votes: 2,
+      ),
+    );
+  }
+
+  void saveConsultant() {
+    createConsultant();
+    Get.back();
   }
 
   @override
@@ -30,7 +43,7 @@ class RegisterController extends GetxController {
     bigImageUrl.dispose();
     profilePicUrl.dispose();
     date.dispose();
-    duration.dispose();
+    durationTxt.dispose();
     super.onClose();
   }
 

@@ -1,7 +1,9 @@
 import 'package:consultant_page/controllers/register_controller.dart';
 import 'package:consultant_page/utils/extensions.dart';
+import 'package:consultant_page/widgets/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../utils/theme.dart';
@@ -14,7 +16,18 @@ class RegisterPage extends StatelessWidget {
     final controller = Get.put(RegisterController());
 
     return Scaffold(
-      backgroundColor: CColors.black.withOpacity(0.9),
+      appBar: AppBar(
+        backgroundColor: CColors.black,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: const Icon(
+            FontAwesomeIcons.chevronLeft,
+            color: CColors.subtitleColor,
+          ),
+        ),
+      ),
+      backgroundColor: CColors.black,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -66,7 +79,7 @@ class RegisterPage extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
                     borderSide: const BorderSide(color: CColors.mainColor, width: 2)),
-                hintText: "Enter a profil image URL",
+                hintText: "Enter a profile image URL",
                 hintStyle: const TextStyle(color: CColors.white),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(width: 3, color: CColors.white),
@@ -78,7 +91,14 @@ class RegisterPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
-              controller: controller.duration,
+              onTap: () async {
+                final result = await Get.dialog(const DurationPicker());
+                if (result != null) {
+                  controller.duration.value = result;
+                  controller.durationTxt.text = controller.duration.value.format;
+                }
+              },
+              controller: controller.durationTxt,
               style: const TextStyle(color: CColors.white),
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -104,7 +124,7 @@ class RegisterPage extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
                     borderSide: const BorderSide(color: CColors.mainColor, width: 2)),
-                hintText: "Coose a Date",
+                hintText: "Choose a Date",
                 hintStyle: const TextStyle(color: CColors.white),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(width: 3, color: CColors.white),
@@ -135,9 +155,7 @@ class RegisterPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: InkWell(
-              onTap: () {
-                controller.createConsultant();
-              },
+              onTap: controller.saveConsultant,
               child: Ink(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

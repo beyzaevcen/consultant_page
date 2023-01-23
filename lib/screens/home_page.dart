@@ -144,8 +144,12 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...Const.consultants.map((e) => ConsultantWidget(
-                  consultant: e,
+            Obx(() => Column(
+                  children: [
+                    ...Const.consultants.map((e) => ConsultantWidget(
+                          consultant: e,
+                        ))
+                  ],
                 )),
             InkWell(
               onTap: () => Get.to(const RegisterPage()),

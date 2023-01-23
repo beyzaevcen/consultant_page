@@ -1,4 +1,5 @@
 import 'package:consultant_page/models/consultant.dart';
+import 'package:get/get.dart';
 
 class Const {
   static final consultants = <Consultant>[
@@ -32,5 +33,5 @@ class Const {
         date: DateTime.now(),
         duration: const Duration(minutes: 60),
         votes: 4)
-  ];
+  ].obs;
 }
